@@ -30,7 +30,7 @@ def usgs_earthquake_source():
 if __name__ == "__main__":
     # Create the pipeline
     pipeline = dlt.pipeline(
-        pipeline_name="usgs_earthquakes_pipeline",
+        pipeline_name=" ",
         destination="snowflake",
         dataset_name="usgs_data"
     )
