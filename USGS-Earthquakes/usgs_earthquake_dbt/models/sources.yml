@@ -1,0 +1,7 @@
+version: 2
+sources:
+  - name: usgs_data
+    description: "Raw earthquake data from USGS"
+    tables:
+      - name: earthquakes
+        description: "Earthquake events with details such as magnitude, location, and time."
