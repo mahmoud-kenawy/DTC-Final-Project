@@ -15,18 +15,7 @@ An end-to-end Data Engineering (ELT) pipeline that extracts global earthquake da
 
 The project follows a standard ELT (Extract, Load, Transform) architecture:
 
-```mermaid
-graph LR
-    A[USGS API] -->|Extract| B(dlt Pipeline)
-    B -->|Load| C[(Snowflake: Raw Data)]
-    C -->|Transform| D(dbt Models)
-    D -->|Analytics| E[(Snowflake: Modeled Data)]
-    
-    subgraph Orchestration
-    F((Apache Airflow)) -.->|Schedules & Triggers| B
-    F -.->|Schedules & Triggers| D
-    end
-```
+![Architecture Diagram](docs/DTCFinal.drawio.svg)
 
 ### Directory Layout
 - **`.` (Root)**: Contains the `dlt` ingestion script (`usgs_pipeline.py`) which connects to the USGS REST API and loads data into Snowflake.
