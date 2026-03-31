@@ -18,6 +18,19 @@ The project follows a standard ELT (Extract, Load, Transform) architecture:
 ![Architecture Diagram](docs/DTCFinal.drawio.svg)
 
 ### Directory Layout
+
+```text
+USGS-Earthquakes/
+├── .dlt/                  # dlt configuration and secrets
+├── airflow/               # Astronomer Airflow environment (DAGs, config)
+├── docs/                  # Project documentation & architecture diagram
+├── usgs_earthquake_dbt/   # dbt project containing SQL models & transformations
+├── .env                   # Environment variables
+├── README.md              # Project overview
+├── requirements.txt       # Python dependencies
+└── usgs_pipeline.py       # Main dlt ingestion script
+```
+
 - **`.` (Root)**: Contains the `dlt` ingestion script (`usgs_pipeline.py`) which connects to the USGS REST API and loads data into Snowflake.
 - **`airflow/`**: Dedicated Apache Airflow environment generated via Astronomer Astro CLI (`astro dev init`). It contains the DAGs for pipeline orchestration.
 - **`usgs_earthquake_dbt/`**: The dbt project that connects to Snowflake to clean, flatten, and model the raw ingested JSON data into structured tables/views.
