@@ -11,6 +11,14 @@ An end-to-end Data Engineering (ELT) pipeline that extracts global earthquake da
 
 ---
 
+## 🎯 Problem Statement
+
+Rescue teams, governments, and residents in earthquake-prone zones need to understand seismic patterns—where earthquakes occur most frequently, which depths are the most dangerous, and whether there is a correlation between earthquake magnitude and tsunami risk. 
+
+To address this, the project builds a robust ELT data pipeline that extracts earthquake data from the USGS API utilizing **dlt**, loads the raw data into **Snowflake**, and transforms it into analytics-ready models using **dbt**, all orchestrated by **Apache Airflow**. This powers a dashboard featuring geographical maps and charts, helping stakeholders understand both the temporal and spatial distribution of seismic activity to enhance preparedness and response strategies.
+
+---
+
 ## 🏗️ Architecture & Project Structure
 
 The project follows a standard ELT (Extract, Load, Transform) architecture:
