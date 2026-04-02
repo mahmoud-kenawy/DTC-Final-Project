@@ -1,8 +1,8 @@
 SELECT
     id as earthquake_id,
     properties:place as location_description,
-    to_timestamp(properties:time) as event_timestamp,
-    to_timestamp(properties:updated) as updated_timestamp,
+    TO_TIMESTAMP(GET(EARTHQUAKES.PROPERTIES, 'time')::VARCHAR) as event_timestamp,
+    TO_TIMESTAMP(GET(EARTHQUAKES.PROPERTIES, 'time')::VARCHAR) as updated_timestamp,
     properties:type as event_type,
     properties:mag::FLOAT as magnitude,
     properties:magType as magnitude_type,

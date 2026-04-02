@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: stg_earthquake
+    columns:
+      - name: earthquake_id
+        tests:
+          - not_null
+          - unique
+          
+      - name: location_description
+        tests:
+          - not_null
+          
+      - name: event_type
+        tests:
+          - not_null
+              
+      - name: review_status
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['automatic', 'reviewed', 'deleted']
+              
+      - name: alert_level
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['green', 'yellow', 'orange', 'red', 'unrated']

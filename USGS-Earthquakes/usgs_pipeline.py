@@ -1,7 +1,7 @@
 import dlt
 from dlt.sources.rest_api import rest_api_source
 import logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s',filename=r'D:\My\my study\Courses\DE Projects\DTC Final Project\USGS Earthquakes\logs\usgs_pipeline.log', filemode='a')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s',filename=r'D:\My\my study\Courses\DE Projects\DTC Final Project\USGS-Earthquakes\logs\usgs_pipeline.log', filemode='a')
 def usgs_earthquake_source():
     """
     DLT source for USGS earthquake data using rest_api_source
@@ -17,8 +17,7 @@ def usgs_earthquake_source():
                 "name": "earthquakes",
                 "endpoint": {
                     "path": "all_month.geojson",
-                    "data_selector": "features",  # Extract data from the 'features' key
-                    "pagination": "single_page",  # No pagination needed for this endpoint                           
+                    "data_selector": "features",# Extract data from the 'features' key                        
                 },  # No pagination needed for this endpoint
                 "write_disposition": "merge",  # Use 'merge' to update existing records based on the primary key
                 "primary_key": "id",
