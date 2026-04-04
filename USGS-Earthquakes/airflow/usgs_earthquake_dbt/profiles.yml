@@ -1,0 +1,13 @@
+usgs_earthquake_dbt:
+  outputs:
+    dev:
+      account: ZQKFJQP-ZH93575
+      database: DLT_DATA
+      password: vM_23YFENtZ5dq-
+      role: ACCOUNTADMIN
+      schema: USGS_DATA
+      threads: 1
+      type: snowflake
+      user: MAHMOUDKENAWY
+      warehouse: EARTHQUAKE_WH
+  target: dev
