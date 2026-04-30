@@ -59,6 +59,10 @@ This project solves that by building a **robust, automated ELT pipeline** that:
 
 The project follows a modern **Streaming + ELT** pattern. Infrastructure is provisioned using **Terraform**.
 
+<div align="center">
+  <img src="USGS-Earthquakes/docs/DTCFinal_Stream.drawio.svg" alt="Architecture Diagram" />
+</div>
+
 ```mermaid
 graph LR
     subgraph "External"
@@ -141,6 +145,8 @@ graph LR
 
 The dbt project transforms raw data through three layers, adapting the schema explicitly for BigQuery:
 
+![dbt Lineage](USGS-Earthquakes/docs/dbt_lineage.jpg)
+
 ```
 usgs_data.earthquake ──▶ stg_earthquake ──┬──▶ mrt_emergency
                                           ├──▶ mrt_earthquake_categories
@@ -160,6 +166,8 @@ usgs_data.earthquake ──▶ stg_earthquake ──┬──▶ mrt_emergency
 
 The pipeline is orchestrated by Apache Airflow. The DAG `earthquake_dag` handles the following flow sequentially:
 
+![Airflow DAG Graph](USGS-Earthquakes/docs/usgs_dag-graph.png)
+
 1. `fetch_usgs_data` (`BashOperator`): Triggers a Python batch producer to fetch the latest hour's GeoJSON and write to the local Kafka broker.
 2. `consume_kafka_spark` (`BashOperator` / `SparkSubmitOperator`): Triggers a Spark Structured Streaming batch to consume the latest messages, explode the layout, and append cleanly into BigQuery.
 3. `dbt_build` (`BashOperator`): Triggers the transformations to recreate upstream mart tables.
@@ -171,6 +179,9 @@ The pipeline is orchestrated by Apache Airflow. The DAG `earthquake_dag` handles
 ## 📊 Dashboard
 
 The dashboard is built natively using **Google Looker Studio**, directly hooked into our heavily analytical dbt BigQuery models.
+
+[![Earthquake Dashboard](USGS-Earthquakes/docs/dashboard.jpg)](USGS-Earthquakes/docs/Earthquake-Dashboard.pdf)
+*[View Full Earthquake Dashboard PDF](USGS-Earthquakes/docs/Earthquake-Dashboard.pdf)*
 
 - 🗺️ **Global Map**
 - 📊 **Magnitude Distribution**
@@ -206,6 +217,8 @@ terraform apply
 ```
 This will automatically generate your `usgs_data` dataset.
 
+![Data in GCP](USGS-Earthquakes/docs/data-in-gcp.jpg)
+
 ### Step 3: Start Kafka and Docker Services
 
 You should start the local infrastructure using docker-compose.
@@ -239,6 +252,11 @@ docker exec -e GCP_PROJECT_ID=<your-project-id> -e KAFKA_BOOTSTRAP_SERVERS=kafka
 cd ../airflow/usgs_earthquake_dbt
 dbt build --profiles-dir .
 ```
+
+**Pipeline Execution Logs:**
+
+![Pipeline Log](USGS-Earthquakes/docs/pipelinetask_log.jpg)
+![dbt Log](USGS-Earthquakes/docs/dbttask_log.jpg)
 
 ---
 
