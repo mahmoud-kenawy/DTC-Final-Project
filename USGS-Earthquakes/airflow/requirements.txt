@@ -3,3 +3,5 @@ dlt[snowflake]>=1.22.2
 dbt-snowflake==1.11.2
 astronomer-cosmos
 apache-airflow-providers-snowflake
+apache-airflow-providers-apache-spark
+confluent-kafka

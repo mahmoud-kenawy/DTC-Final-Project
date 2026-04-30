@@ -1,1 +1,6 @@
 .bruin.yml
+generate_diagram.py
+**/.terraform/
+*.exe
+gcp-credentials.json
+*.tfstate*

@@ -1,4 +1,5 @@
 usgs_earthquake_dbt:
+  target: dev
   outputs:
     dev:
       account: ZQKFJQP-ZH93575
@@ -10,4 +11,3 @@ usgs_earthquake_dbt:
       type: snowflake
       user: MAHMOUDKENAWY
       warehouse: EARTHQUAKE_WH
-  target: dev
