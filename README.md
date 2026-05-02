@@ -69,6 +69,10 @@ USGS REST API ──▶ DLT (Python) ──▶ Snowflake (usgs_data) ──▶ d
    all_month.geojson                                       Orchestrated by Airflow (hourly)
 ```
 
+
+
+
+
 ### Streaming Pipeline Architecture
 
 <div align="center">
