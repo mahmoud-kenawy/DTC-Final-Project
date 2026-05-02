@@ -64,43 +64,29 @@ The project follows a modern **Streaming + ELT** pattern. Infrastructure is prov
 </div>
 
 ```mermaid
-graph LR
-    subgraph "External"
-        USGS["USGS REST API"]
+graph TD
+    subgraph "Streaming Ingestion Pipeline"
+        direction LR
+        USGS["USGS REST API"] -->|REST| Producer["Python Producer"]
+        Producer -->|Publish| Kafka["Kafka Broker"]
+        Kafka -->|Listen| Spark["PySpark Consumer (spark-master)"]
+        Spark -->|Streaming Append| BQ_Raw[("BigQuery (Raw)")]
     end
 
-    subgraph "Streaming Ingestion (Docker Compose)"
-        Producer["Python Producer"]
-        Kafka["Kafka Broker"]
-        Spark["PySpark Consumer (spark-master)"]
-        
-        USGS -->|REST| Producer
-        Producer -->|Publish| Kafka
-        Kafka -->|Listen| Spark
+    subgraph "Batch Transformation Pipeline"
+        direction LR
+        BQ_Raw_Batch[("BigQuery (Raw)")] -->|Query| DBT["dbt Core"]
+        DBT -->|Materialize| BQ_Marts[("BigQuery (Marts)")]
+        BQ_Marts --> Looker["Looker Studio"]
     end
 
-    subgraph "Google Cloud (Managed via Terraform)"
-        BQ_Raw[("BigQuery (Raw)")]
-        BQ_Marts[("BigQuery (Marts)")]
-        
-        Spark -->|Streaming Append| BQ_Raw
-    end
-    
-    subgraph "Transformation"
-        DBT["dbt Core"]
-        BQ_Raw -->|Query| DBT
-        DBT -->|Materialize| BQ_Marts
-    end
-
-    subgraph "BI"
-        Looker["Looker Studio"]
-        BQ_Marts --> Looker
-    end
+    BQ_Raw -.-> BQ_Raw_Batch
 
     style USGS fill:#f9f,stroke:#333,stroke-width:2px
     style Kafka fill:#ff9,stroke:#333,stroke-width:2px
     style Spark fill:#f96,stroke:#333,stroke-width:2px
     style BQ_Raw fill:#69f,stroke:#333,stroke-width:2px
+    style BQ_Raw_Batch fill:#69f,stroke:#333,stroke-width:2px
     style DBT fill:#f39,stroke:#333,stroke-width:2px
     style Looker fill:#6cf,stroke:#333,stroke-width:2px
 ```
