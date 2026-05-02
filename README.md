@@ -69,14 +69,15 @@ USGS REST API ──▶ DLT (Python) ──▶ Snowflake (usgs_data) ──▶ d
    all_month.geojson                                       Orchestrated by Airflow (hourly)
 ```
 
-
-
+<div align="center">
+  <img src="USGS-Earthquakes/docs/DTCFinal.drawio .svg" alt="Batch Pipeline Architecture Diagram" width="85%" />
+</div>
 
 
 ### Streaming Pipeline Architecture
 
 <div align="center">
-  <img src="USGS-Earthquakes/docs/DTCFinal_Stream.drawio.svg" alt="Streaming Pipeline Architecture Diagram" width="85%" />
+  <img src="USGS-Earthquakes/docs/stream_pipeline_architecture.png" alt="Streaming Pipeline Architecture Diagram" width="90%" />
 </div>
 
 ```
