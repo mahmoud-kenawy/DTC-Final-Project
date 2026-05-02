@@ -63,10 +63,6 @@ The project runs **two independent pipelines** provisioned on GCP infrastructure
 
 ### Batch Pipeline Architecture
 
-<div align="center">
-  <img src="USGS-Earthquakes/docs/DTCFinal.drawio .svg" alt="Batch Pipeline Architecture Diagram" width="85%" />
-</div>
-
 ```
 USGS REST API ──▶ DLT (Python) ──▶ Snowflake (usgs_data) ──▶ dbt build ──▶ Snowflake Marts
       ↑                                                               ↑
@@ -323,8 +319,6 @@ terraform apply
 
 Edit `terraform/variables.tf` to change the `project_id`, `region`, or resource names before applying.
 
-![Data in GCP](USGS-Earthquakes/docs/data-in-gcp.jpg)
-
 ---
 
 ### Step 3 — Configure Environment Variables
@@ -461,6 +455,10 @@ docker exec \
 ```
 
 > The Spark UI is available at [http://localhost:9090](http://localhost:9090) to monitor the streaming job.
+
+Once Terraform has provisioned GCP, the Kafka producer is publishing events, and the Spark consumer is streaming data into BigQuery, your GCP Console should reflect all provisioned resources and live data:
+
+![Data in GCP — provisioned resources and live BigQuery data](USGS-Earthquakes/docs/data-in-gcp.jpg)
 
 To stop the streaming cluster:
 ```bash
