@@ -68,12 +68,11 @@ USGS REST API ──▶ DLT (Python) ──▶ Snowflake (usgs_data) ──▶ d
       ↑                                                               ↑
    all_month.geojson                                       Orchestrated by Airflow (hourly)
 ```
-
-### Streaming Pipeline Architecture
-
 <div align="center">
   <img src="USGS-Earthquakes/docs/DTCFinal_Stream.drawio.svg" alt="Streaming Pipeline Architecture Diagram" width="85%" />
 </div>
+
+### Streaming Pipeline Architecture
 
 ```
 USGS REST API ──▶ Kafka Producer (Python) ──▶ Kafka Broker ──▶ PySpark Structured Streaming ──▶ BigQuery
