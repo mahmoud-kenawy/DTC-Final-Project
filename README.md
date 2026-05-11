@@ -513,7 +513,7 @@ DTC-Final-Project/
     │
     ├── docs/                                # 📂 Architecture diagrams & screenshots
     │   ├── DTCFinal.drawio .svg             #    Batch pipeline architecture diagram
-    │   ├── DTCFinal_Stream.drawio.svg       #    Stream pipeline architecture diagram
+    │   ├── stream_pipeline_architecture.png #    Stream pipeline architecture diagram
     │   ├── dashboard.jpg                    #    Looker Studio dashboard screenshot
     │   ├── Earthquake-Dashboard.pdf         #    Full dashboard PDF export
     │   ├── dbt_lineage.jpg                  #    dbt model lineage graph
